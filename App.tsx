@@ -3,17 +3,24 @@ import CategoriesScreen from './screens/CategoriesScreen';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MealsOverviewScreen from './screens/MealsOverviewScreen';
 
-const Stack = createNativeStackNavigator(); // Stack is an object with two properties where every property holds an object that acts as a component. Therefore, we can use those nested component objects.
+export type RootStackParamList = {
+  Categories: undefined;
+  Overview: undefined;
+};
+
+const RootStack = createNativeStackNavigator<RootStackParamList>(); // Stack is an object with two properties where every property holds an object that acts as a component. Therefore, we can use those nested component objects.
 
 export default function App() {
   return (
     <>
       <StatusBar style='auto' />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name='MealsCategories' component={CategoriesScreen} />
-        </Stack.Navigator>
+        <RootStack.Navigator>
+          <RootStack.Screen name='Categories' component={CategoriesScreen} />
+          <RootStack.Screen name='Overview' component={MealsOverviewScreen} />
+        </RootStack.Navigator>
       </NavigationContainer>
     </>
   );
