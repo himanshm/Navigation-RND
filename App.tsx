@@ -12,12 +12,15 @@ export type RootStackParamList = {
 
 const RootStack = createNativeStackNavigator<RootStackParamList>(); // Stack is an object with two properties where every property holds an object that acts as a component. Therefore, we can use those nested component objects.
 
+// Out of the box, the top-most screen (i.e. the first child inside of <Stack.Navigator>) is used as the initial screen.
+// You can therefore change the initial screen by changing the <Stack.Screen> order. Alternatively, there also is an initialRouteName prop that can be set on the navigator component (i.e., on <Stack.Navigator> in this case):
+
 export default function App() {
   return (
     <>
       <StatusBar style='auto' />
       <NavigationContainer>
-        <RootStack.Navigator>
+        <RootStack.Navigator initialRouteName='Categories'>
           <RootStack.Screen name='Categories' component={CategoriesScreen} />
           <RootStack.Screen name='Overview' component={MealsOverviewScreen} />
         </RootStack.Navigator>
