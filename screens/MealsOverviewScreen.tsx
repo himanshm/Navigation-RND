@@ -1,8 +1,10 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList, ListRenderItemInfo } from 'react-native';
 import { MEALS } from '../data/dummy-data';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 import { useRoute } from '@react-navigation/native';
+import Meal from '../models/meals';
+import MealItem from '../components/MealItem';
 
 type OverviewScreenProps = NativeStackScreenProps<
   RootStackParamList,
@@ -13,9 +15,21 @@ function MealsOverviewScreen({ route }: OverviewScreenProps) {
   // Alternative for a component which is not registered as a screen
   // const route = useRoute()
   const categoryId = route.params.categoryId;
+
+  const displayedMeals = MEALS.filter(
+    (mealItem) => mealItem.categoryIds.indexOf(categoryId) >= 0
+  );
+
+  function renderMealItem(itemData: ListRenderItemInfo<Meal>) {
+    return <MealItem title={itemData.item.title} />;
+  }
   return (
     <View style={styles.container}>
-      <Text>Meals Overview-{categoryId}</Text>
+      <FlatList
+        data={displayedMeals}
+        keyExtractor={(item) => item.id}
+        renderItem={renderMealItem}
+      />
     </View>
   );
 }
