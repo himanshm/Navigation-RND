@@ -1,9 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Image, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { RootStackParamList } from '../App';
 import { MEALS } from '../data/dummy-data';
 import MealDetails from '../components/MealDetails';
+import Subtitle from '../components/meal-detail/Subtitle';
+import List from '../components/meal-detail/List';
 
 type DetailScreenProps = NativeStackScreenProps<RootStackParamList, 'Details'>;
 
@@ -31,24 +33,49 @@ function MealDetailScreen({ route }: DetailScreenProps) {
   } = mealItem;
 
   return (
-    <View>
-      <Image source={{ uri: imageUrl }} />
-      <Text>{title}</Text>
+    <ScrollView style={styles.rootContainer}>
+      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Text style={styles.title}>{title}</Text>
       <MealDetails
         complexity={complexity}
         affordability={affordability}
         duration={duration}
+        textStyle={styles.detailText}
       />
-      <Text>Ingredients</Text>
-      {ingredients.map((ingredient) => (
-        <Text key={ingredient}>{ingredient}</Text>
-      ))}
-      <Text>Steps</Text>
-      {steps.map((step) => (
-        <Text key={step}>{step}</Text>
-      ))}
-    </View>
+      <View style={styles.listOuterContainer}>
+        <View style={styles.listContainer}>
+          <Subtitle subtitle='Ingredients' />
+          <List data={ingredients} />
+          <Subtitle subtitle='Steps' />
+          <List data={steps} />
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
 export default MealDetailScreen;
+
+const styles = StyleSheet.create({
+  rootContainer: { marginBottom: 32 },
+  image: {
+    width: '100%',
+    height: 350,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    margin: 8,
+    textAlign: 'center',
+    color: 'white',
+  },
+  detailText: {
+    color: 'white',
+  },
+  listOuterContainer: {
+    alignItems: 'center',
+  },
+  listContainer: {
+    width: '80%',
+  },
+});
