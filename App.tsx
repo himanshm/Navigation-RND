@@ -18,7 +18,7 @@ const RootStack = createNativeStackNavigator<RootStackParamList>(); // Stack is 
 export default function App() {
   return (
     <>
-      <StatusBar style='auto' />
+      <StatusBar style='light' />
       <NavigationContainer>
         <RootStack.Navigator
           initialRouteName='Categories'
@@ -35,7 +35,13 @@ export default function App() {
               title: 'All Categories',
             }}
           />
-          <RootStack.Screen name='Overview' component={MealsOverviewScreen} />
+          <RootStack.Screen
+            name='Overview'
+            component={MealsOverviewScreen}
+            // options={({ route, navigation }) => {
+            //   return { title: route.params.categoryId ?? 'Overview' };
+            // }}
+          />
         </RootStack.Navigator>
       </NavigationContainer>
     </>
