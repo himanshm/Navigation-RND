@@ -7,7 +7,7 @@ import MealsOverviewScreen from './screens/MealsOverviewScreen';
 
 export type RootStackParamList = {
   Categories: undefined;
-  Overview: undefined;
+  Overview: { categoryId: string };
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>(); // Stack is an object with two properties where every property holds an object that acts as a component. Therefore, we can use those nested component objects.

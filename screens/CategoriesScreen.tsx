@@ -13,7 +13,7 @@ type CategoriesScreenProps = NativeStackScreenProps<
 function CategoriesScreen({ navigation }: CategoriesScreenProps) {
   function renderCategoryItem(itemData: ListRenderItemInfo<Category>) {
     function pressHandler() {
-      navigation.navigate('Overview');
+      navigation.navigate('Overview', { categoryId: itemData.item.id });
     }
     return (
       <CategoryGridTile
