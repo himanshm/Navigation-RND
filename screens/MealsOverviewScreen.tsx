@@ -2,7 +2,6 @@ import { View, StyleSheet, FlatList, ListRenderItemInfo } from 'react-native';
 import { MEALS, CATEGORIES } from '../data/dummy-data';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
-import { useRoute } from '@react-navigation/native';
 import Meal from '../models/meals';
 import MealItem from '../components/MealItem';
 import { useEffect, useLayoutEffect } from 'react';
@@ -38,6 +37,7 @@ function MealsOverviewScreen({ route, navigation }: OverviewScreenProps) {
     const item = itemData.item;
 
     const mealItemProps = {
+      id: item.id,
       title: item.title,
       duration: item.duration,
       complexity: item.complexity,
